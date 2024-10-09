@@ -242,13 +242,14 @@ public class CustomStringBuilder{
         return value;
     }
 
-    public void undo(){
+    public boolean undo(){
         if(!stackSnapshots.isEmpty()){
             value.setLength(0);
-            value.append(stackSnapshots.peek().getState());
-        }else{
-            System.err.println("Stack is empty");
+            value.append(stackSnapshots.pop().getState());
+            return true;
         }
+        System.err.println("Stack is empty");
+       return false;
     }
 
     private void saveState(){
